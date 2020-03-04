@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.null01</groupId>
-    <artifactId>non-intrusion-log</artifactId>
+    <artifactId>non-intrusive-log</artifactId>
     <version>1.0</version>
-    <name>non-intrusion-log</name>
-    <description>Non intrusion log util</description>
+    <name>non-intrusive-log</name>
+    <description>Non intrusive Logging Facade for Java </description>
 
     <properties>
         <java.version>1.8</java.version>

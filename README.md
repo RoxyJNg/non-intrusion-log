@@ -1,2 +1,2 @@
-# non-intrusion-log
-非侵入式日志组件
+# non-intrusive-log
+Non intrusive Logging Facade for Java

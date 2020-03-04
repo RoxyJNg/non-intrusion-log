@@ -1,13 +1,13 @@
-package com.null01.nonintrusionlog;
+package com.null01.nonintrusivelog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NonIntrusionLogApplication {
+public class NonIntrusiveLogApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NonIntrusionLogApplication.class, args);
+        SpringApplication.run(NonIntrusiveLogApplication.class, args);
     }
 
 }

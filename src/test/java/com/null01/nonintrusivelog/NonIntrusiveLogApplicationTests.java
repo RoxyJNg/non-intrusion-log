@@ -1,10 +1,10 @@
-package com.null01.nonintrusionlog;
+package com.null01.nonintrusivelog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NonIntrusionLogApplicationTests {
+class NonIntrusiveLogApplicationTests {
 
     @Test
     void contextLoads() {
