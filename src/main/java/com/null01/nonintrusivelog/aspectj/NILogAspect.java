@@ -1,9 +1,14 @@
 package com.null01.nonintrusivelog.aspectj;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.reflect.Method;
 
 /**
  * 日志切面
@@ -30,7 +35,15 @@ public class NILogAspect {
     private void afterPointCut(){}
 
     @Before("beforePointCut()")
-    public void before(){
+    public void before(JoinPoint joinPoint){
+        Object[] args = joinPoint.getArgs();
+        Signature signature = joinPoint.getSignature();
+        MethodSignature methodSignature = (MethodSignature) signature;
+        String[] parameterNames = methodSignature.getParameterNames();
+        Method method = methodSignature.getMethod();
+        for (int i =0 ,len=parameterNames.length;i < len ;i++){
+            System.out.println("参数名："+ parameterNames[i] + " = " +args[i]);
+        }
         logger.info("---before:Test");
     }
 

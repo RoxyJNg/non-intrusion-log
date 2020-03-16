@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @NILogAround
+    @NILogBefore
     @RequestMapping("/h")
-    public String h() throws Exception{
+    public String h(String i,int e) throws Exception{
         System.err.println("h");
         throw new Exception("jjjj");
 //        return "h";
