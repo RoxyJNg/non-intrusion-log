@@ -28,38 +28,58 @@ public class NILogAspect {
     @Pointcut("@annotation(com.null01.nonintrusivelog.annotation.NILogAround)")
     private void aroundPointCut(){}
 
-    /**
-     * 日志：后置
-     */
-    @Pointcut("@annotation(com.null01.nonintrusivelog.annotation.NILogAfter)")
-    private void afterPointCut(){}
 
     @Before("beforePointCut()")
     public void before(JoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
-        String[] parameterNames = methodSignature.getParameterNames();
         Method method = methodSignature.getMethod();
+        String methodName = method.getName();
+        String[] parameterNames = methodSignature.getParameterNames();
+        String paramStr = "";
         for (int i =0 ,len=parameterNames.length;i < len ;i++){
-            System.out.println("参数名："+ parameterNames[i] + " = " +args[i]);
+            paramStr += parameterNames[i] + " = " +args[i]+";";
         }
-        logger.info("---before:Test");
+        logger.info("[NILogBefore] <METHOD NAME>:"+methodName+" <PARAMETERS>:"+paramStr);
     }
 
     @Around("aroundPointCut()")
     public void around(ProceedingJoinPoint pjp) {
-        logger.info("---around:before:Test");
-        try {
-            pjp.proceed();
-        }catch (Throwable t){
-            logger.error("---around:proceedThrowable:Test:"+t.getMessage());
+        Object[] args = pjp.getArgs();
+        Signature signature = pjp.getSignature();
+        MethodSignature methodSignature = (MethodSignature) signature;
+        Method method = methodSignature.getMethod();
+        String methodName = method.getName();
+        String[] parameterNames = methodSignature.getParameterNames();
+        String paramStr = "";
+        for (int i =0 ,len=parameterNames.length;i < len ;i++){
+            paramStr += parameterNames[i] + " = " +args[i]+";";
         }
-        logger.info("---around:after:Test");
+        logger.info("[NILogAround:before] <METHOD NAME>:"+methodName+" <PARAMETERS>:"+paramStr);
+        Object result = null;
+        try {
+            result = pjp.proceed();
+        }catch (Throwable t){
+            logger.error("[NILogAround:proceedThrowable] <MESSAGE>:"+t.getMessage());
+        }
+        logger.info("[NILogAround:after] <RESULT>:"+result);
     }
 
-    @After("afterPointCut()")
-    public void after(){
-        logger.info("---after:Test");
+    /**
+     * 异常记录
+     */
+    @AfterThrowing(pointcut ="beforePointCut()", throwing="ex")
+    public void beforePointCutThrowing(JoinPoint joinPoint,Exception ex){
+        doAfterThrowing(joinPoint,ex);
+    }
+
+    @AfterThrowing(pointcut ="aroundPointCut()", throwing="ex")
+    public void aroundPointCutThrowing(JoinPoint joinPoint,Exception ex){
+        doAfterThrowing(joinPoint,ex);
+    }
+
+    private void doAfterThrowing(JoinPoint joinPoint,Exception ex){
+        logger.error("[NILogThrowable] <MESSAGE>:"+ex.getMessage());
     }
 }
