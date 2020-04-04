@@ -45,7 +45,7 @@ public class NILogAspect {
     }
 
     @Around("aroundPointCut()")
-    public void around(ProceedingJoinPoint pjp) {
+    public void around(ProceedingJoinPoint pjp) throws Throwable {
         Object[] args = pjp.getArgs();
         Signature signature = pjp.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
@@ -57,12 +57,7 @@ public class NILogAspect {
             paramStr += parameterNames[i] + " = " +args[i]+";";
         }
         logger.info("[NILogAround:before] <METHOD NAME>:"+methodName+" <PARAMETERS>:"+paramStr);
-        Object result = null;
-        try {
-            result = pjp.proceed();
-        }catch (Throwable t){
-            logger.error("[NILogAround:proceedThrowable] <MESSAGE>:"+t.getMessage());
-        }
+        Object result =  pjp.proceed();
         logger.info("[NILogAround:after] <RESULT>:"+result);
     }
 
@@ -70,16 +65,16 @@ public class NILogAspect {
      * 异常记录
      */
     @AfterThrowing(pointcut ="beforePointCut()", throwing="ex")
-    public void beforePointCutThrowing(JoinPoint joinPoint,Exception ex){
+    public void beforePointCutThrowing(JoinPoint joinPoint,Exception ex) throws Exception{
         doAfterThrowing(joinPoint,ex);
     }
 
     @AfterThrowing(pointcut ="aroundPointCut()", throwing="ex")
-    public void aroundPointCutThrowing(JoinPoint joinPoint,Exception ex){
+    public void aroundPointCutThrowing(JoinPoint joinPoint,Exception ex) throws Exception{
         doAfterThrowing(joinPoint,ex);
     }
 
-    private void doAfterThrowing(JoinPoint joinPoint,Exception ex){
+    private void doAfterThrowing(JoinPoint joinPoint,Exception ex) throws Exception{
         logger.error("[NILogThrowable] <MESSAGE>:"+ex.getMessage());
     }
 }
