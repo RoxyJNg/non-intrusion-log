@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
 //    @NILogAround
-    @NILogBefore
+//    @NILogBefore
     @RequestMapping("/h")
     public String hhh(String i,int e) throws Exception{
         System.err.println("h");
-        throw new Exception("jjjj");
-//        return "h";
+//        throw new Exception("jjjj");
+        return "h";
     }
 }
