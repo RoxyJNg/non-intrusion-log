@@ -1,9 +1,9 @@
-package com.null01.nonintrusivelog.aspectj;
+package com.null01.nonintrusivelog.util;
 
+import com.null01.nonintrusivelog.aspectj.NILogAnnotationAspect;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,26 +11,15 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 
 /**
- * 日志切面
+ * 日志核心功能逻辑
  */
-@Aspect
-public class NILogAspect {
-    public static Logger logger = LoggerFactory.getLogger(NILogAspect.class);
-    /**
-     * 日志：前置
-     */
-    @Pointcut("@annotation(com.null01.nonintrusivelog.annotation.NILogBefore)")
-    private void beforePointCut(){}
+public class LogAction {
+    public static Logger logger = LoggerFactory.getLogger(NILogAnnotationAspect.class);
 
     /**
-     * 日志：环绕
+     * 前置记录
      */
-    @Pointcut("@annotation(com.null01.nonintrusivelog.annotation.NILogAround)")
-    private void aroundPointCut(){}
-
-
-    @Before("beforePointCut()")
-    public void before(JoinPoint joinPoint){
+    public static void before(JoinPoint joinPoint){
         Object[] args = joinPoint.getArgs();
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
@@ -44,8 +33,10 @@ public class NILogAspect {
         logger.info("[NILogBefore] <METHOD NAME>:"+methodName+" <PARAMETERS>:"+paramStr);
     }
 
-    @Around("aroundPointCut()")
-    public void around(ProceedingJoinPoint pjp) throws Throwable {
+    /**
+     * 环绕记录
+     */
+    public static void around(ProceedingJoinPoint pjp) throws Throwable {
         Object[] args = pjp.getArgs();
         Signature signature = pjp.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
@@ -64,17 +55,7 @@ public class NILogAspect {
     /**
      * 异常记录
      */
-    @AfterThrowing(pointcut ="beforePointCut()", throwing="ex")
-    public void beforePointCutThrowing(JoinPoint joinPoint,Exception ex) throws Exception{
-        doAfterThrowing(joinPoint,ex);
-    }
-
-    @AfterThrowing(pointcut ="aroundPointCut()", throwing="ex")
-    public void aroundPointCutThrowing(JoinPoint joinPoint,Exception ex) throws Exception{
-        doAfterThrowing(joinPoint,ex);
-    }
-
-    private void doAfterThrowing(JoinPoint joinPoint,Exception ex) throws Exception{
+    public static void throwing(JoinPoint joinPoint,Exception ex) throws Exception{
         logger.error("[NILogThrowable] <MESSAGE>:"+ex.getMessage());
     }
 }

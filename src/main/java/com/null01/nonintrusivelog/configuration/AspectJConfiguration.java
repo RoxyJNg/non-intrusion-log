@@ -1,6 +1,7 @@
 package com.null01.nonintrusivelog.configuration;
 
-import com.null01.nonintrusivelog.aspectj.NILogAspect;
+import com.null01.nonintrusivelog.aspectj.NILogAnnotationAspect;
+import com.null01.nonintrusivelog.aspectj.NILogDesignatorAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -12,7 +13,11 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 public class AspectJConfiguration {
     @Bean
-    public NILogAspect nILogAspect(){
-        return new NILogAspect();
+    public NILogAnnotationAspect nILogAnnotationAspect(){
+        return new NILogAnnotationAspect();
+    }
+    @Bean
+    public NILogDesignatorAspect nILogDesignatorAspect(){
+        return new NILogDesignatorAspect();
     }
 }
