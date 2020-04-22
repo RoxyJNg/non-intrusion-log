@@ -1,4 +1,4 @@
 {
-  "before": ["com.null01.nonintrusivelog.TestController.hhh"],
+  "before": ["com.null01.nonintrusivelog.TestController.hhh","com.null01.nonintrusivelog.TestController.hhh2"],
   "around": []
 }

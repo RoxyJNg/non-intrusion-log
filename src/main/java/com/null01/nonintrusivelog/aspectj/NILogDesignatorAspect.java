@@ -1,5 +1,6 @@
 package com.null01.nonintrusivelog.aspectj;
 
+import com.null01.nonintrusivelog.resolver.JsonResolver;
 import com.null01.nonintrusivelog.util.LogAction;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -15,6 +16,11 @@ import org.aspectj.lang.annotation.Before;
 public class NILogDesignatorAspect {
 
     final String str = "execution(* com.null01.nonintrusivelog.TestController.hhh(..))";
+    //注解参数必须要是解析期常量，唉
+    final String beforeValue = JsonResolver.getBefore();
+
+    public NILogDesignatorAspect() throws Exception {
+    }
 
     @Before(str)
     public void testBefore(JoinPoint joinPoint){

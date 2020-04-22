@@ -16,4 +16,13 @@ public class TestController {
 //        throw new Exception("jjjj");
         return "h";
     }
+
+    //    @NILogAround
+//    @NILogBefore
+    @RequestMapping("/h2")
+    public String hhh2() throws Exception{
+        System.err.println("h");
+//        throw new Exception("jjjj");
+        return "h";
+    }
 }
