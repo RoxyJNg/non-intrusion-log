@@ -1,6 +1,4 @@
 {
-  "className": "TestController",
-  "methods": [
-    "hhh(String i,int e)"
-  ]
+  "before": ["com.null01.nonintrusivelog.TestController.hhh"],
+  "around": []
 }
