@@ -17,7 +17,7 @@ public class AspectJConfiguration {
         return new NILogAnnotationAspect();
     }
     @Bean
-    public NILogDesignatorAspect nILogDesignatorAspect(){
+    public NILogDesignatorAspect nILogDesignatorAspect() throws Exception {
         return new NILogDesignatorAspect();
     }
 }
