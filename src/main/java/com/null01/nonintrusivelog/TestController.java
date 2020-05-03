@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestController {
+public class TestController implements BaseController{
 
 //    @NILogAround
 //    @NILogBefore
@@ -21,7 +21,7 @@ public class TestController {
 //    @NILogBefore
     @RequestMapping("/h2")
     public String hhh2() throws Exception{
-        System.err.println("h");
+        System.err.println("h2");
 //        throw new Exception("jjjj");
         return "h";
     }

@@ -1,5 +1,7 @@
 package com.null01.nonintrusivelog.util;
 
+import com.null01.nonintrusivelog.BaseController;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -14,13 +16,13 @@ public class DynamicProxyDemo {
     }
 
     public void run() throws Exception{
-        Object obj = Class.forName(className).newInstance();
+        Object testController = Class.forName(className).newInstance();
         ClassLoader classLoader = this.getClass().getClassLoader();
-        Class[] classes = new Class[]{obj.getClass()};
-        MyInvocationHandler myInvocationHandler = new MyInvocationHandler(obj);
-        Object self = Proxy.newProxyInstance(classLoader,classes,myInvocationHandler);
+        Class[] interfaces = testController.getClass().getInterfaces();
+        MyInvocationHandler myInvocationHandler = new MyInvocationHandler(testController);
+        Object self = Proxy.newProxyInstance(classLoader,interfaces,myInvocationHandler);
         Method method = self.getClass().getDeclaredMethod(methodName);
-        method.invoke("hah");
+        method.invoke(self);
     }
 
     class MyInvocationHandler implements InvocationHandler{
@@ -32,8 +34,8 @@ public class DynamicProxyDemo {
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             System.err.println("----before---------");
-            method.invoke(object);
-            return null;
+            Object result = method.invoke(object,args);
+            return result;
         }
     }
 }
