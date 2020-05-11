@@ -17,7 +17,7 @@ public class NILogDesignatorAspect {
 
     final String str = "execution(* com.null01.nonintrusivelog.TestController.hhh(..))";
     //注解参数必须要是解析期常量，唉
-    final String beforeValue = JsonResolver.getBefore();
+//    final String beforeValue = JsonResolver.getBefore();
 
     public NILogDesignatorAspect() throws Exception {
     }

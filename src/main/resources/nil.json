@@ -1,4 +1,8 @@
 {
-  "before": ["com.null01.nonintrusivelog.TestController.hhh","com.null01.nonintrusivelog.TestController.hhh2"],
+  "before": [{
+    "clazz": "com.null01.nonintrusivelog.TestController",
+    "method": "hhh",
+    "args": ["java.lang.String","java.lang.Integer"]
+  }],
   "around": []
 }

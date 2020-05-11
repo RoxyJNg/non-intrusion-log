@@ -11,7 +11,7 @@ public class TestController implements BaseController{
 //    @NILogAround
 //    @NILogBefore
     @RequestMapping("/h")
-    public String hhh(String i,int e) throws Exception{
+    public String hhh(String i,Integer e) throws Exception{
         System.err.println("h");
 //        throw new Exception("jjjj");
         return "h";

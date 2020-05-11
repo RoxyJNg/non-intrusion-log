@@ -12,8 +12,8 @@ class NonIntrusiveLogApplicationTests {
     @Test
     @NILogBefore
     public void contextLoads() throws Exception{
-        String before = JsonResolver.getBefore();
-        System.err.println(before);
+//        String before = JsonResolver.getBefore();
+//        System.err.println(before);
     }
 
 }

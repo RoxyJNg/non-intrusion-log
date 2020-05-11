@@ -6,22 +6,22 @@ import java.util.List;
  * 配置实体
  */
 public class JsonConfiguration {
-    private List<String> before;
-    private List<String> around;
+    private List<Signature> before;
+    private List<Signature> around;
 
-    public List<String> getBefore() {
+    public List<Signature> getBefore() {
         return before;
     }
 
-    public void setBefore(List<String> before) {
+    public void setBefore(List<Signature> before) {
         this.before = before;
     }
 
-    public List<String> getAround() {
+    public List<Signature> getAround() {
         return around;
     }
 
-    public void setAround(List<String> around) {
+    public void setAround(List<Signature> around) {
         this.around = around;
     }
 }

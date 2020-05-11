@@ -3,9 +3,11 @@ package com.null01.nonintrusivelog.resolver;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.null01.nonintrusivelog.entity.JsonConfiguration;
+import com.null01.nonintrusivelog.entity.Signature;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
+import java.util.List;
 
 
 /**
@@ -32,17 +34,7 @@ public class JsonResolver {
         return configuration;
     }
 
-    public static String getBefore() throws Exception{
-        getConfig();
-        StringBuffer before = new StringBuffer();
-        if(jsonConfiguration.getBefore()!=null && jsonConfiguration.getBefore().size()>0){
-            for (String clazz:jsonConfiguration.getBefore()){
-                before.append("* ");
-                before.append(clazz);
-                before.append("(..) || ");
-            }
-            return before.substring(0,before.length()-4);
-        }
-        return null;
+    public static List<Signature> getBefore() throws Exception{
+        return getConfig().getBefore();
     }
 }
